@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Haming", "Haming\Haming.csproj", "{B6775D8A-CB99-4200-B80A-35C0000D31AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6775D8A-CB99-4200-B80A-35C0000D31AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6775D8A-CB99-4200-B80A-35C0000D31AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6775D8A-CB99-4200-B80A-35C0000D31AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6775D8A-CB99-4200-B80A-35C0000D31AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F809CE56-1046-4226-BF7F-35E6B913FF91}
+	EndGlobalSection
+EndGlobal
