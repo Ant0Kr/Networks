@@ -12,20 +12,17 @@ namespace Haming
         {
             HamingCoder coder = new HamingCoder();
             Printer printer = new Printer();
-            string message = "wzjq";
+            string message = "wzjqdffg";
             List<bool> binaryCode = coder.EncodeAsBinary(message);
             List<bool> hamingCode = coder.EncodeAsHaming(binaryCode);
-            List<bool> binaryWithError = coder.ToDoError(binaryCode);
-            List<bool> hamingWithError = coder.EncodeAsHaming(binaryWithError);
+            List<bool> hamingWithError = coder.ToDoError(hamingCode);
             printer.PrintMes("Binary code:");
             printer.PrintHamingCode(binaryCode,16);
-            printer.PrintMes("Binary code with error:");
-            printer.PrintHamingCode(binaryWithError, 16);
             printer.PrintMes("Haming code:");
-            printer.PrintHamingCode(hamingCode,21);
+            printer.PrintHamingCode(hamingCode, 21);
             printer.PrintMes("Haming code with error:");
             printer.PrintHamingCode(hamingWithError, 21);
-            printer.PrintMes("Source message:"+coder.Decode(hamingCode,hamingWithError));
+            printer.PrintMes("Source message:"+coder.Decode(hamingWithError));
         }
     }
 }

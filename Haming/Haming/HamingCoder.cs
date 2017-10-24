@@ -71,55 +71,50 @@ namespace Haming
             for (int k = 1; k <= MaxInfBitNumber; k *= Binary)
             {
                 int counter = 0;
-                for (int l = k; l <= MaxPacketLength; l += k)
+                for (int l = k-1; l < MaxPacketLength; l += k)
                 {
                     int a = k;
-                    for (int n = l; a > 0 && n <= MaxPacketLength; n++, a--, l++)
+                    for (int n = l; a > 0 && n < MaxPacketLength; n++, a--, l++)
                     {
-                        if (hamingCode[n - 1])
+                        if (hamingCode[n])
                         {
                             counter++;
                         }
                     }
                 }
-                if (counter % 2 == 1)
-                {
-                    hamingCode[k - 1] = true;
-                }
+                 hamingCode[k - 1] = counter % 2 == 1;
             }
             return hamingCode;
         }
         
-        public List<bool> ToDoError(List<bool> binaryCode)
+        public List<bool> ToDoError(List<bool> hamingCode)
         {
-            List<bool> errorBinaryCode = new List<bool>();
-            errorBinaryCode.AddRange(binaryCode);
+            List<bool> errorHamingCode = new List<bool>();
+            errorHamingCode.AddRange(hamingCode);
             Random random = new Random();
-            for (int i = 0;i< errorBinaryCode.Count;i+= MaxInfBitNumber)
+            for (int i = 0;i< hamingCode.Count;i+= MaxPacketLength)
             {
-                int index = random.Next(MaxInfBitNumber);
-
-                if (errorBinaryCode[i + index])
-                {
-                    errorBinaryCode[i + index] = false;
-                }
-                else
-                {
-                    errorBinaryCode[i + index] = true;
-                }
+                int index = random.Next(MaxPacketLength);
+                errorHamingCode[i + index] = !errorHamingCode[i + index];
             }
-            return errorBinaryCode;
+            return errorHamingCode;
         }
 
-        public string Decode(List<bool> hamingTrueCode, List<bool> hamingErrorCode)
+        public string Decode(List<bool> hamingErrorCode)
         {
             Printer printer = new Printer();
-            for(int i = 0; i < hamingTrueCode.Count / MaxPacketLength; i++)
+            
+            List<bool> hamingControlCode = new List<bool>();
+            for (int i = 0;i< hamingErrorCode.Count;i+= MaxPacketLength)
+            {
+                hamingControlCode.AddRange(EncodePacket(hamingErrorCode.GetRange(i, MaxPacketLength)));
+            }
+            for (int i = 0; i < hamingControlCode.Count / MaxPacketLength; i++)
             {
                 int errorCounter = 0;
                 for (int j = 1;j<= MaxInfBitNumber; j*=Binary)
                 {
-                    if(hamingTrueCode[i* MaxPacketLength + j-1]!= hamingErrorCode[i * MaxPacketLength + j-1])
+                    if(hamingControlCode[i* MaxPacketLength+j-1])
                     {
                         errorCounter +=  j;
                     }
